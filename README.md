@@ -1,4 +1,4 @@
-#Paradise Resorts - Resort Reservation System [JAVA AAT]
+# Paradise Resorts - Resort Reservation System [JAVA AAT]
 
 A comprehensive Java Swing application for managing resort reservations with user authentication, admin panel, and invoice generation.
 
