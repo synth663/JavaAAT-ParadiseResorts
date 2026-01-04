@@ -8,6 +8,7 @@ import views.MainFrame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -86,12 +87,25 @@ public class ResortBrowsePanel extends JPanel {
                 BorderFactory.createEmptyBorder(20, 20, 20, 20)));
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
 
-        // Resort icon placeholder
-        JLabel iconLabel = new JLabel("[RESORT]");
-        iconLabel.setFont(new Font(UITheme.getFontFamily(), Font.BOLD, 12));
-        iconLabel.setForeground(new Color(149, 165, 166));
-        iconLabel.setPreferredSize(new Dimension(70, 50));
+        // Resort icon/image
+        JLabel iconLabel = new JLabel();
+        iconLabel.setPreferredSize(new Dimension(140, 100)); // Increased size for image
         iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        iconLabel.setBorder(BorderFactory.createLineBorder(new Color(236, 240, 241)));
+
+        String imagePath = getImagePath(resort.getName());
+        if (imagePath != null) {
+            ImageIcon icon = getResortImage(imagePath, 140, 100);
+            if (icon != null) {
+                iconLabel.setIcon(icon);
+            } else {
+                iconLabel.setText("[IMG Missing]");
+            }
+        } else {
+            iconLabel.setText("🏠"); // Default text icon
+            iconLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 40));
+        }
+
         card.add(iconLabel, BorderLayout.WEST);
 
         // Resort details
@@ -136,5 +150,32 @@ public class ResortBrowsePanel extends JPanel {
         card.add(buttonPanel, BorderLayout.EAST);
 
         return card;
+    }
+
+    private String getImagePath(String resortName) {
+        if (resortName == null)
+            return null;
+        if (resortName.contains("Mountain View") || resortName.contains("Lodge"))
+            return "media/Lodge-Champery.jpg";
+        if (resortName.contains("Tropical") || resortName.contains("Oasis"))
+            return "media/oasisbeachspa.jpg";
+        if (resortName.contains("Paradise") || resortName.contains("Beach"))
+            return "media/paradisebeachresort.jpg";
+        return null;
+    }
+
+    private ImageIcon getResortImage(String path, int width, int height) {
+        try {
+            File imgFile = new File(path);
+            if (imgFile.exists()) {
+                ImageIcon originalIcon = new ImageIcon(path);
+                Image img = originalIcon.getImage();
+                Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                return new ImageIcon(newImg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

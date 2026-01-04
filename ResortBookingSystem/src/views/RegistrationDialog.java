@@ -26,9 +26,9 @@ public class RegistrationDialog extends JDialog {
     }
 
     private void initializeUI() {
-        setSize(420, 480);
+        setSize(460, 600); // Increased dimensions
         setLocationRelativeTo(getParent());
-        setResizable(false);
+        setResizable(true); // Allow resizing just in case
 
         JPanel mainPanel = new JPanel(new BorderLayout(10, 15));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(25, 35, 25, 35));
@@ -52,6 +52,7 @@ public class RegistrationDialog extends JDialog {
         int row = 0;
 
         // Username
+        gbc.gridx = 0; // Explicitly set gridx
         gbc.gridy = row++;
         formPanel.add(createLabel("Username *"), gbc);
         gbc.gridy = row++;
@@ -94,6 +95,7 @@ public class RegistrationDialog extends JDialog {
         phoneField = createTextField();
         formPanel.add(phoneField, gbc);
 
+        // Add form panel directly to main panel
         mainPanel.add(formPanel, BorderLayout.CENTER);
 
         // Buttons

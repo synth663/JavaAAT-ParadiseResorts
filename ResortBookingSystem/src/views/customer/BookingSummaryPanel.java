@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 
 /**
  * Panel for reviewing booking and generating invoice.
- */
+*/
 public class BookingSummaryPanel extends JPanel {
     private MainFrame mainFrame;
     private BookingDAO bookingDAO;
