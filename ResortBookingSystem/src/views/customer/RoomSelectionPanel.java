@@ -38,7 +38,6 @@ public class RoomSelectionPanel extends JPanel {
         this.mainFrame = mainFrame;
         this.roomDAO = new RoomDAO();
         this.checkInDate = LocalDate.now().plusDays(1);
-        calculateCheckOutDate();
         initializeUI();
     }
 
